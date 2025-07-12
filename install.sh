@@ -12,7 +12,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-REPO_URL="https://github.com/your-username/bypass-phone.git"
+REPO_URL="https://github.com/nhatpm3124/zal-bypass.git"
 INSTALL_DIR="$HOME/bypass-phone"
 PYTHON_CMD="python3"
 

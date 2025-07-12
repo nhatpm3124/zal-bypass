@@ -1,12 +1,12 @@
 #!/bin/bash
 # One-liner script for quick remote execution
-# Usage: curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/one_liner.sh | bash
+# Usage: curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 
 set -e
 
 # Quick setup and run
 TEMP_DIR="/tmp/bypass-phone-oneliner-$(date +%s)"
-REPO_URL="https://github.com/your-username/bypass-phone.git"
+REPO_URL="https://github.com/nhatpm3124/zal-bypass.git"
 
 echo "🔍 Phone Number Search Tool - One Liner"
 echo "======================================="

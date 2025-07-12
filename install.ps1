@@ -6,7 +6,7 @@ param(
 )
 
 # Configuration
-$RepoUrl = "https://github.com/your-username/bypass-phone.git"
+$RepoUrl = "https://github.com/nhatpm3124/zal-bypass.git"
 $InstallDir = "$env:USERPROFILE\bypass-phone"
 $TempDir = "$env:TEMP\bypass-phone-$(Get-Date -Format 'yyyyMMddHHmmss')"
 

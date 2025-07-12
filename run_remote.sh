@@ -12,7 +12,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-REPO_URL="https://github.com/your-username/bypass-phone.git"
+REPO_URL="https://github.com/nhatpm3124/zal-bypass.git"
 TEMP_DIR="/tmp/bypass-phone-$(date +%s)"
 PYTHON_CMD="python3"
 
@@ -167,7 +167,7 @@ main() {
     echo ""
     echo -e "${GREEN}🎉 Hoàn thành!${NC}"
     echo -e "${BLUE}💡 Để cài đặt vĩnh viễn, chạy:${NC}"
-    echo -e "${BLUE}curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/install.sh | bash${NC}"
+    echo -e "${BLUE}curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.sh | bash${NC}"
 }
 
 # Run main function

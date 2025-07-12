@@ -7,28 +7,28 @@ Công cụ tìm kiếm số điện thoại trên website bằng cách thử cá
 ### ⚡ One-liner (Nhanh nhất)
 ```bash
 # macOS/Linux
-curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/one_liner.sh | bash
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 
 # Windows PowerShell
-iwr -useb https://raw.githubusercontent.com/your-username/bypass-phone/main/install.ps1 | iex -QuickRun
+iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
 ```
 
 ### 🎯 Chạy với menu lựa chọn
 ```bash
 # macOS/Linux
-curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/run_remote.sh | bash
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
 
 # Windows PowerShell
-iwr -useb https://raw.githubusercontent.com/your-username/bypass-phone/main/install.ps1 | iex -QuickRun
+iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
 ```
 
 ### 💾 Cài đặt vĩnh viễn
 ```bash
 # macOS/Linux
-curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.sh | bash
 
 # Windows PowerShell
-iwr -useb https://raw.githubusercontent.com/your-username/bypass-phone/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex
 ```
 
 ## 📁 Cấu trúc dự án
@@ -66,8 +66,8 @@ bypass-phone/
 
 ### 2. Clone repository
 ```bash
-git clone https://github.com/your-username/bypass-phone.git
-cd bypass-phone
+git clone https://github.com/nhatpm3124/zal-bypass.git
+cd zal-bypass
 ```
 
 ### 3. Cài đặt dependencies
@@ -177,10 +177,10 @@ Chạy ẩn trình duyệt: n
 ### Ví dụ 3: Chạy từ GitHub
 ```bash
 # Nhanh và đơn giản
-curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/one_liner.sh | bash
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 
 # Với menu lựa chọn
-curl -sSL https://raw.githubusercontent.com/your-username/bypass-phone/main/run_remote.sh | bash
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
 ```
 
 ## Cách tìm CSS Selector
@@ -247,7 +247,7 @@ pip install --upgrade webdriver-manager
 ### Lỗi khi chạy remote scripts
 ```bash
 # Nếu curl không hoạt động, thử wget
-wget -qO- https://raw.githubusercontent.com/your-username/bypass-phone/main/one_liner.sh | bash
+wget -qO- https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 
 # Nếu có lỗi permissions
 chmod +x script.sh
