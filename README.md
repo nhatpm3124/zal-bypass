@@ -13,12 +13,19 @@ curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner
 iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
 ```
 
-### 🎯 Interactive Mode (Nhập thông tin website)
+### 🎯 Interactive Mode (Nhập thông tin website) - KHUYẾN NGHỊ
 ```bash
-# macOS/Linux - Chế độ tương tác đầy đủ
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+# macOS/Linux - Tải về và mở terminal mới (giải quyết vấn đề input)
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
 
-# Hoặc với menu lựa chọn
+# Hoặc tải về thư mục hiện tại và chạy thủ công
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+# Sau đó chạy: cd zal-bypass-interactive && python3 phone_search.py
+```
+
+### 🎛️ Menu với nhiều lựa chọn
+```bash
+# macOS/Linux - Menu lựa chọn nhiều chế độ
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
 ```
 
@@ -43,7 +50,8 @@ bypass-phone/
 ├── install.ps1              # Auto installer cho Windows
 ├── run_remote.sh            # Remote runner với menu
 ├── one_liner.sh             # Quick test (không cần input)
-├── interactive.sh           # Interactive mode từ GitHub
+├── interactive.sh           # Setup và hướng dẫn chạy
+├── download_and_run.sh      # Tải về và mở terminal mới
 ├── requirements.txt         # Dependencies
 ├── README.md               # Hướng dẫn sử dụng
 └── .gitignore              # Git ignore file
@@ -59,6 +67,7 @@ bypass-phone/
 - ✅ Tự động quản lý ChromeDriver
 - ✅ Chống phát hiện với User-Agent ngẫu nhiên
 - ✅ **Chạy trực tiếp từ GitHub không cần tải về**
+- ✅ **Giải quyết vấn đề stdin với remote execution**
 
 ## Cài đặt thủ công
 
@@ -152,10 +161,14 @@ python quick_start.py
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 ```
 
-### Ví dụ 2: Interactive Mode từ GitHub
+### Ví dụ 2: Interactive Mode từ GitHub (KHUYẾN NGHỊ)
 ```bash
-# Chế độ tương tác đầy đủ, có thể nhập thông tin website
+# Tải về và mở terminal mới - GIẢI PHÁP TỐT NHẤT
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
+
+# Hoặc setup thủ công
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+cd zal-bypass-interactive && python3 phone_search.py
 ```
 
 ### Ví dụ 3: Tìm số điện thoại cụ thể (Local)
@@ -248,12 +261,16 @@ pip install --upgrade webdriver-manager
 - Thay đổi User-Agent
 - Chạy ở chế độ headless
 
-### Lỗi stdin/input khi chạy remote scripts
+### Lỗi stdin/input khi chạy remote scripts ⭐ MỚI
 ```bash
-# Nếu one_liner.sh không nhận input, dùng interactive.sh
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+# GIẢI PHÁP TỐT NHẤT: Sử dụng download_and_run.sh
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
 
-# Hoặc download về local rồi chạy
+# Hoặc setup thủ công
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+cd zal-bypass-interactive && python3 phone_search.py
+
+# Hoặc download về local
 git clone https://github.com/nhatpm3124/zal-bypass.git
 cd zal-bypass
 python phone_search.py
@@ -299,16 +316,25 @@ sudo systemctl start phone-search
 
 ## So sánh các script
 
-| Script | Mục đích | Input cần thiết | Phù hợp cho |
-|--------|----------|----------------|-------------|
-| `one_liner.sh` | Quick test ChromeDriver | Không | Demo nhanh |
-| `interactive.sh` | Chế độ tương tác | Có | Sử dụng thực tế |
-| `run_remote.sh` | Menu lựa chọn | Có | Linh hoạt |
-| `install.sh` | Cài đặt vĩnh viễn | Ít | Setup lâu dài |
+| Script | Mục đích | Input cần thiết | Terminal mới | Phù hợp cho |
+|--------|----------|----------------|--------------|-------------|
+| `one_liner.sh` | Quick test ChromeDriver | Không | Không | Demo nhanh |
+| `download_and_run.sh` | **Interactive đầy đủ** | **Có** | **Có** | **KHUYẾN NGHỊ** |
+| `interactive.sh` | Setup thủ công | Có | Không | Advanced users |
+| `run_remote.sh` | Menu lựa chọn | Có | Không | Linh hoạt |
+| `install.sh` | Cài đặt vĩnh viễn | Ít | Không | Setup lâu dài |
+
+**🎯 Khuyến nghị**: Sử dụng `download_and_run.sh` cho trải nghiệm tốt nhất!
 
 ## Changelog
 
-### v2.2 (Latest)
+### v2.3 (Latest)
+- ✅ **Thêm `download_and_run.sh` - Giải pháp hoàn hảo cho stdin**
+- ✅ Tự động mở terminal mới trên macOS/Linux
+- ✅ Cải thiện trải nghiệm người dùng với remote execution
+- ✅ Cập nhật hướng dẫn chi tiết
+
+### v2.2
 - ✅ **Sửa lỗi stdin với remote execution**
 - ✅ Tách riêng one-liner (quick test) và interactive mode
 - ✅ Thêm script `interactive.sh` cho chế độ tương tác

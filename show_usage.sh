@@ -6,6 +6,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
+BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}🔍 Phone Number Search Tool - Usage Guide${NC}"
@@ -22,8 +23,12 @@ echo -e "${YELLOW}🌐 Remote Usage (run from GitHub):${NC}"
 echo -e "${BLUE}  # Quick test (no input needed)${NC}"
 echo -e "${BLUE}  curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash${NC}"
 echo ""
-echo -e "${BLUE}  # Interactive mode (can input website info)${NC}"
+echo -e "${BOLD}${GREEN}  # RECOMMENDED: Download and run in new terminal${NC}"
+echo -e "${BOLD}${BLUE}  curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash${NC}"
+echo ""
+echo -e "${BLUE}  # Setup and run manually${NC}"
 echo -e "${BLUE}  curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash${NC}"
+echo -e "${BLUE}  cd zal-bypass-interactive && python3 phone_search.py${NC}"
 echo ""
 echo -e "${BLUE}  # With menu options${NC}"
 echo -e "${BLUE}  curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash${NC}"
@@ -54,14 +59,18 @@ echo -e "${BLUE}  python run_with_config.py config.json${NC}"
 echo ""
 
 echo -e "${YELLOW}📊 Script Comparison:${NC}"
-echo -e "${BLUE}  one_liner.sh    -> Quick test (no input needed)${NC}"
-echo -e "${BLUE}  interactive.sh  -> Full interactive mode${NC}"
-echo -e "${BLUE}  run_remote.sh   -> Menu with options${NC}"
-echo -e "${BLUE}  install.sh      -> Permanent installation${NC}"
+echo -e "${BLUE}  one_liner.sh        -> Quick test (no input needed)${NC}"
+echo -e "${BOLD}${GREEN}  download_and_run.sh -> Full interactive (RECOMMENDED)${NC}"
+echo -e "${BLUE}  interactive.sh      -> Setup and manual run${NC}"
+echo -e "${BLUE}  run_remote.sh       -> Menu with options${NC}"
+echo -e "${BLUE}  install.sh          -> Permanent installation${NC}"
 echo ""
 
 echo -e "${YELLOW}🔧 Troubleshooting:${NC}"
-echo -e "${BLUE}  # If one_liner.sh exits immediately, use interactive.sh${NC}"
+echo -e "${BLUE}  # If stdin/input issues, use download_and_run.sh${NC}"
+echo -e "${BOLD}${GREEN}  curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash${NC}"
+echo ""
+echo -e "${BLUE}  # If one_liner.sh exits immediately, use interactive scripts${NC}"
 echo -e "${BLUE}  curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash${NC}"
 echo ""
 echo -e "${BLUE}  # If curl fails, try wget${NC}"
@@ -80,4 +89,6 @@ echo ""
 
 echo -e "${RED}⚠️  Remember: Use responsibly and legally only!${NC}"
 echo ""
-echo -e "${GREEN}📖 Full documentation: cat README.md${NC}" 
+echo -e "${GREEN}📖 Full documentation: cat README.md${NC}"
+echo ""
+echo -e "${BOLD}${GREEN}🎯 BEST EXPERIENCE: Use download_and_run.sh!${NC}" 
