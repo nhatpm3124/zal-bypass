@@ -1,0 +1,11 @@
+{
+  "website_url": "https://example.com/search",
+  "search_box_selector": "#search-input",
+  "result_selector": ".search-results",
+  "phone_pattern": "098x123xxx",
+  "target_name": "Nguyễn Văn A",
+  "delay": 2,
+  "max_results": 10,
+  "headless": false,
+  "save_filename": "search_results.json"
+} 
