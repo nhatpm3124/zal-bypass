@@ -36,12 +36,19 @@ cd "$TEMP_DIR"
 echo "📦 Installing dependencies..."
 $PYTHON_CMD -m pip install -r requirements.txt --quiet
 
-echo "🚀 Running Phone Number Search Tool..."
-$PYTHON_CMD phone_search.py
+echo "🚀 Running Quick Test (Chrome test)..."
+echo "💡 For interactive mode, use: curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash"
+$PYTHON_CMD quick_start.py
 
 # Cleanup
 echo "🧹 Cleaning up..."
 cd /
 rm -rf "$TEMP_DIR"
 
-echo "✅ Done!" 
+echo "✅ Done!"
+echo ""
+echo "🎯 To run interactive mode:"
+echo "   curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash"
+echo ""
+echo "🎯 For full installation:"
+echo "   curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.sh | bash" 

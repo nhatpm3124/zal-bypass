@@ -4,22 +4,22 @@ Công cụ tìm kiếm số điện thoại trên website bằng cách thử cá
 
 ## 🚀 Chạy trực tiếp từ GitHub (Không cần tải về)
 
-### ⚡ One-liner (Nhanh nhất)
+### ⚡ Quick Test (Không cần input, chỉ test ChromeDriver)
 ```bash
-# macOS/Linux
+# macOS/Linux - Test nhanh không cần nhập gì
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 
 # Windows PowerShell
 iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
 ```
 
-### 🎯 Chạy với menu lựa chọn
+### 🎯 Interactive Mode (Nhập thông tin website)
 ```bash
-# macOS/Linux
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
+# macOS/Linux - Chế độ tương tác đầy đủ
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
 
-# Windows PowerShell
-iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
+# Hoặc với menu lựa chọn
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
 ```
 
 ### 💾 Cài đặt vĩnh viễn
@@ -42,7 +42,8 @@ bypass-phone/
 ├── install.sh               # Auto installer cho macOS/Linux
 ├── install.ps1              # Auto installer cho Windows
 ├── run_remote.sh            # Remote runner với menu
-├── one_liner.sh             # One-liner execution
+├── one_liner.sh             # Quick test (không cần input)
+├── interactive.sh           # Interactive mode từ GitHub
 ├── requirements.txt         # Dependencies
 ├── README.md               # Hướng dẫn sử dụng
 └── .gitignore              # Git ignore file
@@ -145,7 +146,19 @@ python quick_start.py
 
 ## Ví dụ sử dụng
 
-### Ví dụ 1: Tìm số điện thoại cụ thể
+### Ví dụ 1: Quick Test từ GitHub
+```bash
+# Chỉ test ChromeDriver, không cần nhập gì
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
+```
+
+### Ví dụ 2: Interactive Mode từ GitHub
+```bash
+# Chế độ tương tác đầy đủ, có thể nhập thông tin website
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+```
+
+### Ví dụ 3: Tìm số điện thoại cụ thể (Local)
 ```bash
 python phone_search.py
 ```
@@ -160,7 +173,7 @@ Số kết quả tối đa: 1
 Chạy ẩn trình duyệt: n
 ```
 
-### Ví dụ 2: Sử dụng config file
+### Ví dụ 4: Sử dụng config file
 ```json
 {
   "website_url": "https://example.com/search",
@@ -172,15 +185,6 @@ Chạy ẩn trình duyệt: n
   "max_results": 1,
   "headless": false
 }
-```
-
-### Ví dụ 3: Chạy từ GitHub
-```bash
-# Nhanh và đơn giản
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
-
-# Với menu lựa chọn
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
 ```
 
 ## Cách tìm CSS Selector
@@ -244,6 +248,17 @@ pip install --upgrade webdriver-manager
 - Thay đổi User-Agent
 - Chạy ở chế độ headless
 
+### Lỗi stdin/input khi chạy remote scripts
+```bash
+# Nếu one_liner.sh không nhận input, dùng interactive.sh
+curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
+
+# Hoặc download về local rồi chạy
+git clone https://github.com/nhatpm3124/zal-bypass.git
+cd zal-bypass
+python phone_search.py
+```
+
 ### Lỗi khi chạy remote scripts
 ```bash
 # Nếu curl không hoạt động, thử wget
@@ -282,9 +297,24 @@ docker run -it phone-search-tool
 sudo systemctl start phone-search
 ```
 
+## So sánh các script
+
+| Script | Mục đích | Input cần thiết | Phù hợp cho |
+|--------|----------|----------------|-------------|
+| `one_liner.sh` | Quick test ChromeDriver | Không | Demo nhanh |
+| `interactive.sh` | Chế độ tương tác | Có | Sử dụng thực tế |
+| `run_remote.sh` | Menu lựa chọn | Có | Linh hoạt |
+| `install.sh` | Cài đặt vĩnh viễn | Ít | Setup lâu dài |
+
 ## Changelog
 
-### v2.1 (Latest)
+### v2.2 (Latest)
+- ✅ **Sửa lỗi stdin với remote execution**
+- ✅ Tách riêng one-liner (quick test) và interactive mode
+- ✅ Thêm script `interactive.sh` cho chế độ tương tác
+- ✅ Cải thiện hướng dẫn sử dụng
+
+### v2.1
 - ✅ **Chạy trực tiếp từ GitHub**
 - ✅ One-liner execution
 - ✅ Remote runner với menu
