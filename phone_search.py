@@ -16,6 +16,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import json
 import sys
@@ -33,32 +34,8 @@ class PhoneNumberSearcher:
         self.driver = None
         self.found_results = []
         
-    def find_chromedriver_path(self):
-        """Tìm đường dẫn chromedriver đúng"""
-        # Tìm trong thư mục .wdm
-        wdm_path = os.path.expanduser("~/.wdm/drivers/chromedriver/mac64/*/chromedriver-mac-x64/chromedriver")
-        chromedriver_files = glob.glob(wdm_path)
-        
-        if chromedriver_files:
-            # Lấy file chromedriver mới nhất
-            chromedriver_path = max(chromedriver_files, key=os.path.getctime)
-            # Đảm bảo file có thể thực thi
-            os.chmod(chromedriver_path, 0o755)
-            return chromedriver_path
-        
-        # Thử tìm trong PATH
-        try:
-            import subprocess
-            result = subprocess.run(['which', 'chromedriver'], capture_output=True, text=True)
-            if result.returncode == 0:
-                return result.stdout.strip()
-        except:
-            pass
-        
-        return None
-        
     def setup_driver(self, headless=False):
-        """Thiết lập webdriver với ChromeDriver path đã sửa"""
+        """Thiết lập webdriver với tự động tải ChromeDriver"""
         chrome_options = Options()
         if headless:
             chrome_options.add_argument('--headless')
@@ -81,17 +58,11 @@ class PhoneNumberSearcher:
         chrome_options.add_argument(f'--user-agent={random.choice(user_agents)}')
         
         try:
-            # Tìm ChromeDriver path
-            chromedriver_path = self.find_chromedriver_path()
-            if not chromedriver_path:
-                print("❌ Không tìm thấy ChromeDriver!")
-                print("💡 Hãy cài đặt Chrome và thử lại")
-                return False
+            # Tự động tải và cài đặt ChromeDriver
+            print("🔍 Đang tải ChromeDriver...")
+            service = Service(ChromeDriverManager().install())
+            print(f"✓ ChromeDriver đã sẵn sàng: {service.path}")
             
-            print(f"✓ Tìm thấy ChromeDriver: {chromedriver_path}")
-            
-            # Tạo service với path đúng
-            service = Service(chromedriver_path)
             self.driver = webdriver.Chrome(service=service, options=chrome_options)
             
             # Thêm script để ẩn automation
@@ -102,7 +73,8 @@ class PhoneNumberSearcher:
             return True
             
         except Exception as e:
-            print(f"✗ Lỗi khi thiết lập webdriver: {e}")
+            print(f"❌ Lỗi khi thiết lập webdriver: {e}")
+            print("💡 Hãy đảm bảo Chrome đã được cài đặt")
             return False
     
     def generate_phone_combinations(self, pattern):
