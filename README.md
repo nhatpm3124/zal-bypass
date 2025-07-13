@@ -4,15 +4,6 @@ A tool for searching phone numbers on websites by trying combinations of missing
 
 ## Run Directly from GitHub (No Download Required)
 
-### Quick Test (No input needed, ChromeDriver test only)
-```bash
-# macOS/Linux - Quick test without input
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
-
-# Windows PowerShell
-iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
-```
-
 ### Interactive Mode (Enter website information) - RECOMMENDED
 ```bash
 # macOS/Linux - Download and open new terminal (solves input issues)
