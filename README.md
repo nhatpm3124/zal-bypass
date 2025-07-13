@@ -1,35 +1,26 @@
 # Phone Number Search Tool
 
-Công cụ tìm kiếm số điện thoại trên website bằng cách thử các tổ hợp số còn thiếu.
+A tool for searching phone numbers on websites by trying combinations of missing digits.
 
-## 🚀 Chạy trực tiếp từ GitHub (Không cần tải về)
+## Run Directly from GitHub (No Download Required)
 
-### ⚡ Quick Test (Không cần input, chỉ test ChromeDriver)
+### Interactive Mode (Enter website information) - RECOMMENDED
 ```bash
-# macOS/Linux - Test nhanh không cần nhập gì
-curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
-
-# Windows PowerShell
-iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex -QuickRun
-```
-
-### 🎯 Interactive Mode (Nhập thông tin website) - KHUYẾN NGHỊ
-```bash
-# macOS/Linux - Tải về và mở terminal mới (giải quyết vấn đề input)
+# macOS/Linux - Download and open new terminal (solves input issues)
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
 
-# Hoặc tải về thư mục hiện tại và chạy thủ công
+# Or download to current directory and run manually
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
-# Sau đó chạy: cd zal-bypass-interactive && python3 phone_search.py
+# Then run: cd zal-bypass-interactive && python3 phone_search.py
 ```
 
-### 🎛️ Menu với nhiều lựa chọn
+### Menu with Multiple Options
 ```bash
-# macOS/Linux - Menu lựa chọn nhiều chế độ
+# macOS/Linux - Menu selection with multiple modes
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash
 ```
 
-### 💾 Cài đặt vĩnh viễn
+### Permanent Installation
 ```bash
 # macOS/Linux
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.sh | bash
@@ -38,41 +29,41 @@ curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.s
 iwr -useb https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.ps1 | iex
 ```
 
-## 📁 Cấu trúc dự án
+## Project Structure
 
 ```
 bypass-phone/
-├── phone_search.py          # Chương trình chính (interactive mode)
-├── run_with_config.py       # Chạy với file config
-├── config_example.json      # Mẫu file cấu hình
-├── quick_start.py           # Script test nhanh
-├── install.sh               # Auto installer cho macOS/Linux
-├── install.ps1              # Auto installer cho Windows
-├── run_remote.sh            # Remote runner với menu
-├── one_liner.sh             # Quick test (không cần input)
-├── interactive.sh           # Setup và hướng dẫn chạy
-├── download_and_run.sh      # Tải về và mở terminal mới
+├── phone_search.py          # Main program (interactive mode)
+├── run_with_config.py       # Run with config file
+├── config_example.json      # Configuration template
+├── quick_start.py           # Quick test script
+├── install.sh               # Auto installer for macOS/Linux
+├── install.ps1              # Auto installer for Windows
+├── run_remote.sh            # Remote runner with menu
+├── one_liner.sh             # Quick test (no input needed)
+├── interactive.sh           # Setup and run guide
+├── download_and_run.sh      # Download and open new terminal
 ├── requirements.txt         # Dependencies
-├── README.md               # Hướng dẫn sử dụng
+├── README.md               # Usage guide
 └── .gitignore              # Git ignore file
 ```
 
-## Tính năng
+## Features
 
-- ✅ Nhập pattern số điện thoại với các số chưa biết
-- ✅ Tự động tìm kiếm trên website
-- ✅ Dừng khi tìm thấy tên cần tìm
-- ✅ Lưu kết quả tìm kiếm vào file JSON
-- ✅ Hỗ trợ tùy chỉnh thời gian chờ và số kết quả tối đa
-- ✅ Tự động quản lý ChromeDriver
-- ✅ Chống phát hiện với User-Agent ngẫu nhiên
-- ✅ **Chạy trực tiếp từ GitHub không cần tải về**
-- ✅ **Giải quyết vấn đề stdin với remote execution**
+- Enter phone number pattern with unknown digits
+- Automatically search on websites
+- Stop when target name is found
+- Save search results to JSON file
+- Support custom delay and maximum results
+- Automatic ChromeDriver management
+- Anti-detection with random User-Agent
+- Run directly from GitHub without download
+- Solve stdin issues with remote execution
 
-## Cài đặt thủ công
+## Manual Installation
 
-### 1. Cài đặt Python
-Đảm bảo bạn đã cài đặt Python 3.7+ trên máy.
+### 1. Install Python
+Ensure you have Python 3.7+ installed on your machine.
 
 ### 2. Clone repository
 ```bash
@@ -80,304 +71,269 @@ git clone https://github.com/nhatpm3124/zal-bypass.git
 cd zal-bypass
 ```
 
-### 3. Cài đặt dependencies
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Cài đặt Chrome Browser
-Chương trình sẽ tự động tải ChromeDriver, nhưng bạn cần cài đặt Chrome Browser trước.
+### 4. Install Chrome Browser
+The program will automatically download ChromeDriver, but you need to install Chrome Browser first.
 
-## Sử dụng
+## Usage
 
-### Cách 1: Chạy tương tác (Khuyến nghị cho lần đầu)
+### Method 1: Interactive Mode (Recommended for first time)
 ```bash
 python phone_search.py
 ```
 
-### Cách 2: Chạy với config file (Nhanh hơn)
+### Method 2: Run with config file (Faster)
 ```bash
-# Copy và chỉnh sửa file config
+# Copy and edit config file
 cp config_example.json config.json
-# Chỉnh sửa config.json theo website của bạn
-# Chạy với config
+# Edit config.json according to your website
+# Run with config
 python run_with_config.py config.json
 ```
 
-### Cách 3: Quick test
+### Method 3: Quick test
 ```bash
 python quick_start.py
 ```
 
-### Cách nhập thông tin
+### How to Enter Information
 
-1. **URL website**: Nhập đầy đủ URL của website cần tìm kiếm
+1. **Website URL**: Enter the full URL of the website to search
    ```
-   Ví dụ: https://example.com/search
-   ```
-
-2. **CSS Selector của ô tìm kiếm**: Cần inspect element để tìm
-   ```
-   Ví dụ: #search-box
-   Ví dụ: input[name="phone"]
-   Ví dụ: .search-input
+   Example: https://example.com/search
    ```
 
-3. **CSS Selector khu vực kết quả** (Tùy chọn):
+2. **CSS Selector for search box**: Need to inspect element to find
    ```
-   Ví dụ: .search-results
-   Ví dụ: #results-container
-   ```
-
-4. **Pattern số điện thoại**: Sử dụng 'x' hoặc '?' cho số chưa biết
-   ```
-   Ví dụ: 098x123xxx (biết 0987123, thiếu 3 số cuối)
-   Ví dụ: 0987?????5 (biết đầu 0987 và cuối 5)
-   Ví dụ: 09xxxxxxxx (chỉ biết 09)
+   Example: #search-box
+   Example: input[name="phone"]
+   Example: .search-input
    ```
 
-## 💡 Lời khuyên tối ưu
+3. **CSS Selector for results area** (Optional):
+   ```
+   Example: .search-results
+   Example: #results-container
+   ```
 
-### Pattern hiệu quả:
-- ❌ **Tránh**: `0888xxxxxx` (1 triệu tổ hợp)
-- ✅ **Tốt**: `0888123xxx` (1,000 tổ hợp)  
-- ✅ **Tốt nhất**: `088812345x` (10 tổ hợp)
+4. **Phone number pattern**: Use 'x' or '?' for unknown digits
+   ```
+   Example: 098x123xxx (known 0987123, missing last 3 digits)
+   Example: 0987?????5 (known start 0987 and end 5)
+   Example: 09xxxxxxxx (only known 09)
+   ```
 
-### Thời gian chờ:
-- Website thông thường: 1-2 giây
-- Website chậm: 3-5 giây  
-- Tránh bị chặn: ≥1 giây
+## Optimization Tips
 
-### Số lượng kết quả:
-- Test: 1-5 kết quả
-- Thực tế: 10-50 kết quả
-- Thu thập lớn: 100+ kết quả
+### Effective patterns:
+- Avoid: `0888xxxxxx` (1 million combinations)
+- Good: `0888123xxx` (1,000 combinations)
+- Best: `088812345x` (10 combinations)
 
-## Ví dụ sử dụng
+### Delay timing:
+- Regular websites: 1-2 seconds
+- Slow websites: 3-5 seconds
+- Avoid blocking: ≥1 second
 
-### Ví dụ 1: Quick Test từ GitHub
+### Result count:
+- Testing: 1-5 results
+- Real usage: 10-50 results
+- Large collection: 100+ results
+
+## Usage Examples
+
+### Example 1: Quick Test from GitHub
 ```bash
-# Chỉ test ChromeDriver, không cần nhập gì
+# Only test ChromeDriver, no input needed
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 ```
 
-### Ví dụ 2: Interactive Mode từ GitHub (KHUYẾN NGHỊ)
+### Example 2: Interactive Mode from GitHub (RECOMMENDED)
 ```bash
-# Tải về và mở terminal mới - GIẢI PHÁP TỐT NHẤT
+# Download and open new terminal - BEST SOLUTION
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
 
-# Hoặc setup thủ công
+# Or manual setup
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
 cd zal-bypass-interactive && python3 phone_search.py
 ```
 
-### Ví dụ 3: Tìm số điện thoại cụ thể (Local)
+### Example 3: Search specific phone number (Local)
 ```bash
 python phone_search.py
 ```
 ```
-URL website: https://example.com/phonebook
-CSS selector ô tìm kiếm: #phone-search
-CSS selector kết quả: .search-results
-Pattern số điện thoại: 098712345x
-Tên cần tìm: Nguyễn Văn A
-Thời gian chờ: 2
-Số kết quả tối đa: 1
-Chạy ẩn trình duyệt: n
+Website URL: https://example.com/phonebook
+Search box CSS selector: #phone-search
+Results CSS selector: .search-results
+Phone pattern: 098712345x
+Target name: John Doe
+Delay: 2
+Max results: 1
+Run headless: n
 ```
 
-### Ví dụ 4: Sử dụng config file
+### Example 4: Using config file
 ```json
 {
   "website_url": "https://example.com/search",
   "search_box_selector": "#search-input",
   "result_selector": ".search-results",
   "phone_pattern": "098712345x",
-  "target_name": "Nguyễn Văn A",
+  "target_name": "John Doe",
   "delay": 2,
   "max_results": 1,
   "headless": false
 }
 ```
 
-## Cách tìm CSS Selector
+## How to Find CSS Selector
 
-1. **Mở trang web** cần tìm kiếm
-2. **Nhấn F12** để mở Developer Tools
-3. **Nhấn Ctrl+Shift+C** để kích hoạt inspect element
-4. **Click vào ô tìm kiếm** trên trang web
+1. **Open the website** you want to search
+2. **Press F12** to open Developer Tools
+3. **Press Ctrl+Shift+C** to activate inspect element
+4. **Click on the search box** on the webpage
 5. **Copy CSS selector**:
-   - Chuột phải vào element được highlight
-   - Chọn "Copy" > "Copy selector"
+   - Right-click on the highlighted element
+   - Select "Copy" > "Copy selector"
 
-## Kết quả
+## Results
 
-Chương trình sẽ tạo file `search_results.json` chứa:
+The program will create a `search_results.json` file containing:
 ```json
 [
   {
     "phone_number": "0987123456",
-    "result_text": "Nguyễn Văn A - 0987123456",
+    "result_text": "John Doe - 0987123456",
     "found_target": true,
     "timestamp": 1699123456.789
   }
 ]
 ```
 
-## Lưu ý quan trọng
+## Important Notes
 
-⚠️ **Sử dụng có trách nhiệm**:
-- Chỉ sử dụng cho mục đích hợp pháp
-- Tuân thủ Terms of Service của website
-- Không spam hoặc gây quá tải cho server
-- Đặt thời gian chờ hợp lý (≥1 giây)
+**Use responsibly**:
+- Only use for legal purposes
+- Follow website Terms of Service
+- Don't spam or overload servers
+- Set reasonable delay (≥1 second)
 
-⚠️ **Giới hạn**:
-- Một số website có CAPTCHA hoặc rate limiting
-- Có thể cần proxy hoặc rotate IP cho số lượng lớn
-- Cần kiểm tra robots.txt của website
+**Limitations**:
+- Some websites have CAPTCHA or rate limiting
+- May need proxy or IP rotation for large volumes
+- Check website's robots.txt
 
 ## Troubleshooting
 
-### Lỗi "ChromeDriver not found"
+### "ChromeDriver not found" error
 ```bash
-# Cài đặt lại webdriver-manager
+# Reinstall webdriver-manager
 pip install --upgrade webdriver-manager
 ```
 
-### Lỗi "Element not found"
-- Kiểm tra lại CSS selector
-- Thử chờ lâu hơn để trang tải
-- Kiểm tra xem element có trong iframe không
+### "Element not found" error
+- Check CSS selector again
+- Try waiting longer for page to load
+- Check if element is inside iframe
 
-### Lỗi "Timeout"
-- Tăng thời gian chờ
-- Kiểm tra kết nối internet
-- Thử với website khác
+### "Timeout" error
+- Increase delay time
+- Check internet connection
+- Try with different website
 
-### Website chặn
-- Tăng thời gian chờ giữa các request
-- Sử dụng proxy
-- Thay đổi User-Agent
-- Chạy ở chế độ headless
+### Website blocking
+- Increase delay between requests
+- Use proxy
+- Change User-Agent
+- Run in headless mode
 
-### Lỗi stdin/input khi chạy remote scripts ⭐ MỚI
+### stdin/input error when running remote scripts
 ```bash
-# GIẢI PHÁP TỐT NHẤT: Sử dụng download_and_run.sh
+# BEST SOLUTION: Use download_and_run.sh
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
 
-# Hoặc setup thủ công
+# Or manual setup
 curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/interactive.sh | bash
 cd zal-bypass-interactive && python3 phone_search.py
 
-# Hoặc download về local
+# Or download locally
 git clone https://github.com/nhatpm3124/zal-bypass.git
 cd zal-bypass
 python phone_search.py
 ```
 
-### Lỗi khi chạy remote scripts
+### Error running remote scripts
 ```bash
-# Nếu curl không hoạt động, thử wget
+# If curl doesn't work, try wget
 wget -qO- https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/one_liner.sh | bash
 
-# Nếu có lỗi permissions
+# If permissions error
 chmod +x script.sh
 ```
 
-## Tính năng nâng cao
+## Advanced Features
 
-### Chạy với nhiều pattern
+### Run with multiple patterns
 ```bash
-# Tạo nhiều config file
+# Create multiple config files
 cp config_example.json config1.json
 cp config_example.json config2.json
-# Chạy song song
+# Run in parallel
 python run_with_config.py config1.json &
 python run_with_config.py config2.json &
 ```
 
-### Tối ưu hiệu suất
-- Sử dụng headless mode: `"headless": true`
-- Giảm delay: `"delay": 0.5`
-- Tăng max_results: `"max_results": 100`
+### Performance optimization
+- Use headless mode: `"headless": true`
+- Reduce delay: `"delay": 0.5`
+- Increase max_results: `"max_results": 100`
 
 ### Deployment options
 ```bash
-# Chạy trên server
+# Run on server
 nohup python phone_search.py > output.log 2>&1 &
 
-# Chạy với Docker (nếu có Dockerfile)
+# Run with Docker (if Dockerfile exists)
 docker run -it phone-search-tool
 
-# Chạy với systemd service
+# Run with systemd service
 sudo systemctl start phone-search
 ```
 
-## So sánh các script
+## Script Comparison
 
-| Script | Mục đích | Input cần thiết | Terminal mới | Phù hợp cho |
-|--------|----------|----------------|--------------|-------------|
-| `one_liner.sh` | Quick test ChromeDriver | Không | Không | Demo nhanh |
-| `download_and_run.sh` | **Interactive đầy đủ** | **Có** | **Có** | **KHUYẾN NGHỊ** |
-| `interactive.sh` | Setup thủ công | Có | Không | Advanced users |
-| `run_remote.sh` | Menu lựa chọn | Có | Không | Linh hoạt |
-| `install.sh` | Cài đặt vĩnh viễn | Ít | Không | Setup lâu dài |
+| Script | Purpose | Input Required | New Terminal | Suitable For |
+|--------|---------|----------------|--------------|-------------|
+| `one_liner.sh` | Quick ChromeDriver test | No | No | Quick demo |
+| `download_and_run.sh` | **Full interactive** | **Yes** | **Yes** | **RECOMMENDED** |
+| `interactive.sh` | Manual setup | Yes | No | Advanced users |
+| `run_remote.sh` | Menu selection | Yes | No | Flexible |
+| `install.sh` | Permanent install | Minimal | No | Long-term setup |
 
-**🎯 Khuyến nghị**: Sử dụng `download_and_run.sh` cho trải nghiệm tốt nhất!
+**Recommendation**: Use `download_and_run.sh` for best experience!
 
 ## Changelog
 
 ### v2.3 (Latest)
-- ✅ **Thêm `download_and_run.sh` - Giải pháp hoàn hảo cho stdin**
-- ✅ Tự động mở terminal mới trên macOS/Linux
-- ✅ Cải thiện trải nghiệm người dùng với remote execution
-- ✅ Cập nhật hướng dẫn chi tiết
+- Added `download_and_run.sh` - Perfect solution for stdin
+- Automatic new terminal opening on macOS/Linux
+- Improved user experience with remote execution
+- Updated detailed documentation
 
-### v2.2
-- ✅ **Sửa lỗi stdin với remote execution**
-- ✅ Tách riêng one-liner (quick test) và interactive mode
-- ✅ Thêm script `interactive.sh` cho chế độ tương tác
-- ✅ Cải thiện hướng dẫn sử dụng
+## Contact
 
-### v2.1
-- ✅ **Chạy trực tiếp từ GitHub**
-- ✅ One-liner execution
-- ✅ Remote runner với menu
-- ✅ Auto installer cho Windows/macOS/Linux
-- ✅ PowerShell support cho Windows
-
-### v2.0
-- ✅ Tự động quản lý ChromeDriver
-- ✅ Chống phát hiện automation
-- ✅ Hỗ trợ nhiều biến thể tên
-- ✅ Cải thiện hiệu suất
-- ✅ Dọn dẹp code và cấu trúc
-
-### v1.0
-- ✅ Tính năng cơ bản
-- ✅ Pattern matching
-- ✅ Config file support
-
-## Đóng góp
-
-Chúng tôi hoan nghênh mọi đóng góp! Vui lòng:
-1. Fork repository
-2. Tạo feature branch
-3. Commit changes
-4. Push to branch
-5. Create Pull Request
-
-## Liên hệ
-
-- GitHub Issues: Báo cáo lỗi và đề xuất tính năng
-- Email: your-email@example.com
-- Telegram: @your-username
+- GitHub Issues: Bug reports and feature requests
+- Email: nhatpm.sg@gmail.com
 
 ## License
 
-MIT License - Xem file LICENSE để biết chi tiết.
+MIT License - See LICENSE file for details.
 
 ---
 
-⭐ **Nếu công cụ hữu ích, hãy cho một star trên GitHub!** ⭐ 
+**ALL COPYRIGHT BELONG TO NHATPM.SG**
