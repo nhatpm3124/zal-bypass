@@ -9,6 +9,8 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
 # Configuration
@@ -125,7 +127,15 @@ show_menu() {
     echo -e "${PURPLE}💡 Tip: Use Interactive Mode for easy step-by-step input${NC}"
     echo ""
     echo -ne "${YELLOW}🎯 Enter your choice ${GREEN}(1-4)${YELLOW}: ${NC}"
-    read choice
+    
+    # Improved stdin handling for remote execution
+    if [[ -t 0 ]]; then
+        read choice
+    else
+        # If stdin is not a terminal (piped from curl), redirect from /dev/tty
+        exec < /dev/tty
+        read choice
+    fi
     echo ""
     
     case $choice in
@@ -150,7 +160,14 @@ show_menu() {
             # Edit config
             echo -e "${PURPLE}📝 Edit config.json file (press Enter to use default editor):${NC}"
             echo -ne "${CYAN}Editor (nano/vim/code): ${NC}"
-            read editor
+            
+            # Handle editor input
+            if [[ -t 0 ]]; then
+                read editor
+            else
+                exec < /dev/tty
+                read editor
+            fi
             
             if [[ -z "$editor" ]]; then
                 if command -v nano &> /dev/null; then
