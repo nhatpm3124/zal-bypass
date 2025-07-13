@@ -98,34 +98,59 @@ download_and_setup() {
 }
 
 show_menu() {
+    clear
+    echo -e "${CYAN}"
+    echo "  ____  _                        ____                      _     "
+    echo " |  _ \| |__   ___  _ __   ___  / ___|  ___  __ _ _ __ ___| |__  "
+    echo " | |_) | '_ \ / _ \| '_ \ / _ \ \___ \ / _ \/ _\` | '__/ __| '_ \ "
+    echo " |  __/| | | | (_) | | | |  __/  ___) |  __/ (_| | | | (__| | | |"
+    echo " |_|   |_| |_|\___/|_| |_|\___| |____/ \___|\__,_|_|  \___|_| |_|"
     echo ""
-    echo -e "${GREEN}📋 Chọn chế độ chạy:${NC}"
-    echo -e "${BLUE}1) Interactive Mode (Nhập thông tin từng bước)${NC}"
-    echo -e "${BLUE}2) Quick Test (Test nhanh với Google)${NC}"
-    echo -e "${BLUE}3) Config Mode (Tạo config file)${NC}"
-    echo -e "${BLUE}4) Exit${NC}"
+    echo -e "${PURPLE}      ╔══════════════════════════════════════════════════════╗"
+    echo -e "      ║                  📱 PHONE SEARCH TOOL                   ║"
+    echo -e "      ║                    Version 2.0.0                       ║"
+    echo -e "      ╚══════════════════════════════════════════════════════╝${NC}"
     echo ""
-    read -p "Nhập lựa chọn (1-4): " choice
+    echo -e "${YELLOW}🚀 Welcome to Phone Number Search Tool!${NC}"
+    echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    echo -e "${GREEN}📋 Select Run Mode:${NC}"
+    echo ""
+    echo -e "${CYAN}  ${YELLOW}1)${NC} ${GREEN}🔍 Interactive Mode${NC}     ${BLUE}(step-by-step input)${NC}"
+    echo -e "${CYAN}  ${YELLOW}2)${NC} ${GREEN}⚡ Quick Test${NC}           ${BLUE}(quick test with Google)${NC}"
+    echo -e "${CYAN}  ${YELLOW}3)${NC} ${GREEN}⚙️  Config Mode${NC}         ${BLUE}(create config file)${NC}"
+    echo -e "${CYAN}  ${YELLOW}4)${NC} ${RED}🚪 Exit${NC}                 ${BLUE}(quit)${NC}"
+    echo ""
+    echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+    echo -e "${PURPLE}💡 Tip: Use Interactive Mode for easy step-by-step input${NC}"
+    echo ""
+    echo -ne "${YELLOW}🎯 Enter your choice ${GREEN}(1-4)${YELLOW}: ${NC}"
+    read choice
+    echo ""
     
     case $choice in
         1)
-            print_info "Chạy Interactive Mode..."
+            echo -e "${GREEN}🔍 Starting Interactive Mode...${NC}"
+            echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
             $PYTHON_CMD phone_search.py
             ;;
         2)
-            print_info "Chạy Quick Test..."
+            echo -e "${GREEN}⚡ Running Quick Test...${NC}"
+            echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
             $PYTHON_CMD quick_start.py
             ;;
         3)
-            print_info "Chạy Config Mode..."
+            echo -e "${GREEN}⚙️  Starting Config Mode...${NC}"
+            echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
             
             # Create config file
-            echo "Tạo file config.json..."
+            echo -e "${YELLOW}📁 Creating config.json file...${NC}"
             cp config_example.json config.json
             
             # Edit config
-            echo "Chỉnh sửa file config.json (nhấn Enter để sử dụng editor):"
-            read -p "Editor (nano/vim/code): " editor
+            echo -e "${PURPLE}📝 Edit config.json file (press Enter to use default editor):${NC}"
+            echo -ne "${CYAN}Editor (nano/vim/code): ${NC}"
+            read editor
             
             if [[ -z "$editor" ]]; then
                 if command -v nano &> /dev/null; then

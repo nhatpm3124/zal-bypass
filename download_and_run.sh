@@ -1,6 +1,15 @@
 #!/bin/bash
-# Phone Number Search Tool - Download and Run
+# Phone Number Search Tool - Download and Run v2.0
 # Downloads and opens in new terminal for proper stdin handling
+# 
+# Quick start: curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash
+# 
+# Features:
+# - Beautiful Spring Boot-style ASCII art interface
+# - Interactive mode for step-by-step input
+# - Config mode for automated runs
+# - Quick test functionality
+# - Multi-platform support (macOS, Linux)
 
 set -e
 
@@ -9,17 +18,37 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
 # Configuration
 REPO_URL="https://github.com/nhatpm3124/zal-bypass.git"
 LOCAL_DIR="$HOME/zal-bypass-tool"
 PYTHON_CMD="python3"
+VERSION="2.0.0"
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}🔍 Phone Number Search Tool - Download & Run${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    clear
+    echo -e "${CYAN}"
+    echo "  ____  _                        ____                      _     "
+    echo " |  _ \| |__   ___  _ __   ___  / ___|  ___  __ _ _ __ ___| |__  "
+    echo " | |_) | '_ \ / _ \| '_ \ / _ \ \___ \ / _ \/ _\` | '__/ __| '_ \ "
+    echo " |  __/| | | | (_) | | | |  __/  ___) |  __/ (_| | | | (__| | | |"
+    echo " |_|   |_| |_|\___/|_| |_|\___| |____/ \___|\__,_|_|  \___|_| |_|"
+    echo ""
+    echo -e "${PURPLE}      ╔══════════════════════════════════════════════════════╗"
+    echo -e "      ║              📱 PHONE SEARCH TOOL v${VERSION}              ║"
+    echo -e "      ║                Download & Run Script                    ║"
+    echo -e "      ╚══════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo -e "${YELLOW}🚀 Automated Download & Setup Tool${NC}"
+    echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    echo -e "${GREEN}📋 Quick Start Command:${NC}"
+    echo -e "${CYAN}   curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/download_and_run.sh | bash${NC}"
+    echo ""
+    echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
 }
 
 print_success() {
@@ -30,12 +59,16 @@ print_error() {
     echo -e "${RED}❌ $1${NC}"
 }
 
-print_warning() {
-    echo -e "${YELLOW}⚠️ $1${NC}"
+print_info() {
+    echo -e "${BLUE}ℹ️  $1${NC}"
 }
 
-print_info() {
-    echo -e "${BLUE}💡 $1${NC}"
+print_warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
+
+print_step() {
+    echo -e "${CYAN}🔄 $1${NC}"
 }
 
 check_dependencies() {
@@ -89,48 +122,88 @@ open_in_terminal() {
         cat > "$LOCAL_DIR/run_app.sh" << EOF
 #!/bin/bash
 cd "$LOCAL_DIR"
-echo "🔍 Phone Number Search Tool"
-echo "=========================="
+
+# Colors for beautiful output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+NC='\033[0m' # No Color
+
+clear
+echo -e "${CYAN}"
+echo "  ____  _                        ____                      _     "
+echo " |  _ \| |__   ___  _ __   ___  / ___|  ___  __ _ _ __ ___| |__  "
+echo " | |_) | '_ \ / _ \| '_ \ / _ \ \___ \ / _ \/ _\` | '__/ __| '_ \ "
+echo " |  __/| | | | (_) | | | |  __/  ___) |  __/ (_| | | | (__| | | |"
+echo " |_|   |_| |_|\___/|_| |_|\___| |____/ \___|\__,_|_|  \___|_| |_|"
 echo ""
-echo "Chọn chế độ chạy:"
-echo "1) Interactive Mode (nhập thông tin từng bước)"
-echo "2) Config Mode (sử dụng file config)"
-echo "3) Quick Test"
-echo "4) Thoát"
+echo -e "${PURPLE}      ╔══════════════════════════════════════════════════════╗"
+echo -e "      ║                  📱 PHONE SEARCH TOOL                   ║"
+echo -e "      ║                    Version 2.0.0                       ║"
+echo -e "      ╚══════════════════════════════════════════════════════╝${NC}"
 echo ""
-read -p "Nhập lựa chọn (1-4): " choice
+echo -e "${YELLOW}🚀 Welcome to Phone Number Search Tool!${NC}"
+echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+echo ""
+echo -e "${GREEN}📋 Select Run Mode:${NC}"
+echo ""
+echo -e "${CYAN}  ${YELLOW}1)${NC} ${GREEN}🔍 Interactive Mode${NC}     ${BLUE}(step-by-step input)${NC}"
+echo -e "${CYAN}  ${YELLOW}2)${NC} ${GREEN}⚙️  Config Mode${NC}         ${BLUE}(use config file)${NC}"
+echo -e "${CYAN}  ${YELLOW}3)${NC} ${GREEN}⚡ Quick Test${NC}           ${BLUE}(quick test)${NC}"
+echo -e "${CYAN}  ${YELLOW}4)${NC} ${RED}🚪 Exit${NC}                ${BLUE}(quit)${NC}"
+echo ""
+echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+echo -e "${PURPLE}💡 Tip: Use Interactive Mode for easy step-by-step input${NC}"
+echo ""
+echo -ne "${YELLOW}🎯 Enter your choice ${GREEN}(1-4)${YELLOW}: ${NC}"
+read choice
+echo ""
 
 case \$choice in
     1)
-        echo "Chạy Interactive Mode..."
+        echo -e "${GREEN}🔍 Starting Interactive Mode...${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
         python3 phone_search.py
         ;;
     2)
-        echo "Sử dụng Config Mode..."
+        echo -e "${GREEN}⚙️  Using Config Mode...${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
         if [[ ! -f "config.json" ]]; then
-            echo "Tạo file config mới từ template..."
+            echo -e "${YELLOW}📁 Creating new config file from template...${NC}"
             cp config_example.json config.json
-            echo "Vui lòng chỉnh sửa file config.json và chạy lại"
-            open config.json 2>/dev/null || echo "Chỉnh sửa file config.json thủ công"
+            echo -e "${PURPLE}📝 Please edit config.json and run again${NC}"
+            open config.json 2>/dev/null || echo -e "${RED}❌ Please edit config.json manually${NC}"
         else
             python3 run_with_config.py config.json
         fi
         ;;
     3)
-        echo "Chạy Quick Test..."
+        echo -e "${GREEN}⚡ Running Quick Test...${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
         python3 quick_start.py
         ;;
     4)
-        echo "Thoát"
+        echo -e "${RED}🚪 Goodbye! Thank you for using Phone Search Tool${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
         exit 0
         ;;
     *)
-        echo "Lựa chọn không hợp lệ"
+        echo -e "${RED}❌ Invalid choice! Please select 1-4${NC}"
+        echo -e "${YELLOW}🔄 Restarting application...${NC}"
+        sleep 2
+        exec "\$0"
         ;;
 esac
 
 echo ""
-echo "Nhấn Enter để đóng..."
+echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+echo -e "${PURPLE}✨ Thank you for using Phone Search Tool! ✨${NC}"
+echo -e "${YELLOW}📞 Contact us if you need more support!${NC}"
+echo ""
+echo -e "${CYAN}Press Enter to close...${NC}"
 read
 EOF
         chmod +x "$LOCAL_DIR/run_app.sh"
@@ -148,11 +221,88 @@ EOF
         cat > "$LOCAL_DIR/run_app.sh" << EOF
 #!/bin/bash
 cd "$LOCAL_DIR"
-echo "🔍 Phone Number Search Tool"
-echo "=========================="
-python3 phone_search.py
+
+# Colors for beautiful output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+NC='\033[0m' # No Color
+
+clear
+echo -e "${CYAN}"
+echo "  ____  _                        ____                      _     "
+echo " |  _ \| |__   ___  _ __   ___  / ___|  ___  __ _ _ __ ___| |__  "
+echo " | |_) | '_ \ / _ \| '_ \ / _ \ \___ \ / _ \/ _\` | '__/ __| '_ \ "
+echo " |  __/| | | | (_) | | | |  __/  ___) |  __/ (_| | | | (__| | | |"
+echo " |_|   |_| |_|\___/|_| |_|\___| |____/ \___|\__,_|_|  \___|_| |_|"
 echo ""
-echo "Nhấn Enter để đóng..."
+echo -e "${PURPLE}      ╔══════════════════════════════════════════════════════╗"
+echo -e "      ║                  📱 PHONE SEARCH TOOL                   ║"
+echo -e "      ║                    Version 2.0.0                       ║"
+echo -e "      ╚══════════════════════════════════════════════════════╝${NC}"
+echo ""
+echo -e "${YELLOW}🚀 Welcome to Phone Number Search Tool!${NC}"
+echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+echo ""
+echo -e "${GREEN}📋 Select Run Mode:${NC}"
+echo ""
+echo -e "${CYAN}  ${YELLOW}1)${NC} ${GREEN}🔍 Interactive Mode${NC}     ${BLUE}(step-by-step input)${NC}"
+echo -e "${CYAN}  ${YELLOW}2)${NC} ${GREEN}⚙️  Config Mode${NC}         ${BLUE}(use config file)${NC}"
+echo -e "${CYAN}  ${YELLOW}3)${NC} ${GREEN}⚡ Quick Test${NC}           ${BLUE}(quick test)${NC}"
+echo -e "${CYAN}  ${YELLOW}4)${NC} ${RED}🚪 Exit${NC}                ${BLUE}(quit)${NC}"
+echo ""
+echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+echo -e "${PURPLE}💡 Tip: Use Interactive Mode for easy step-by-step input${NC}"
+echo ""
+echo -ne "${YELLOW}🎯 Enter your choice ${GREEN}(1-4)${YELLOW}: ${NC}"
+read choice
+echo ""
+
+case \$choice in
+    1)
+        echo -e "${GREEN}🔍 Starting Interactive Mode...${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+        python3 phone_search.py
+        ;;
+    2)
+        echo -e "${GREEN}⚙️  Using Config Mode...${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+        if [[ ! -f "config.json" ]]; then
+            echo -e "${YELLOW}📁 Creating new config file from template...${NC}"
+            cp config_example.json config.json
+            echo -e "${PURPLE}📝 Please edit config.json and run again${NC}"
+            xdg-open config.json 2>/dev/null || echo -e "${RED}❌ Please edit config.json manually${NC}"
+        else
+            python3 run_with_config.py config.json
+        fi
+        ;;
+    3)
+        echo -e "${GREEN}⚡ Running Quick Test...${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+        python3 quick_start.py
+        ;;
+    4)
+        echo -e "${RED}🚪 Goodbye! Thank you for using Phone Search Tool${NC}"
+        echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+        exit 0
+        ;;
+    *)
+        echo -e "${RED}❌ Invalid choice! Please select 1-4${NC}"
+        echo -e "${YELLOW}🔄 Restarting application...${NC}"
+        sleep 2
+        exec "\$0"
+        ;;
+esac
+
+echo ""
+echo -e "${BLUE}═══════════════════════════════════════════════════════════════${NC}"
+echo -e "${PURPLE}✨ Thank you for using Phone Search Tool! ✨${NC}"
+echo -e "${YELLOW}📞 Contact us if you need more support!${NC}"
+echo ""
+echo -e "${CYAN}Press Enter to close...${NC}"
 read
 EOF
         chmod +x "$LOCAL_DIR/run_app.sh"
