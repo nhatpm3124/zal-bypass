@@ -84,8 +84,8 @@ def main():
         for file in files_to_remove:
             if os.path.exists(file):
                 os.remove(file)
-                print(f"🗑️ Đã xóa {file}")
-        print("✅ Dọn dẹp hoàn tất!")
+                print(f"🗑️ Deleted {file}")
+        print("✅ Cleanup completed!")
     else:
         run_test()
 

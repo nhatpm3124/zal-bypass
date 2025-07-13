@@ -39,9 +39,9 @@ print_info() {
 }
 
 cleanup() {
-    print_info "Đang dọn dẹp..."
+    print_info "Cleaning up..."
     rm -rf "$TEMP_DIR"
-    print_success "Dọn dẹp hoàn tất!"
+    print_success "Cleanup completed!"
 }
 
 trap cleanup EXIT
