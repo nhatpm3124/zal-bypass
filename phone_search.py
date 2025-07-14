@@ -60,7 +60,62 @@ class PhoneNumberSearcher:
         try:
             # Tự động tải và cài đặt ChromeDriver
             print("🔍 Đang tải ChromeDriver...")
-            service = Service(ChromeDriverManager().install())
+            
+            # Thử phương pháp 1: WebDriver Manager
+            try:
+                chromedriver_path = ChromeDriverManager().install()
+                print(f"✓ ChromeDriver path: {chromedriver_path}")
+                
+                # Kiểm tra xem file có phải là chromedriver thực sự không
+                if 'THIRD_PARTY_NOTICES' in chromedriver_path:
+                    # Tìm file chromedriver thực sự trong cùng thư mục
+                    import os
+                    driver_dir = os.path.dirname(chromedriver_path)
+                    real_chromedriver = os.path.join(driver_dir, 'chromedriver')
+                    if os.path.exists(real_chromedriver):
+                        chromedriver_path = real_chromedriver
+                        print(f"✓ Đã tìm thấy file chromedriver thực: {chromedriver_path}")
+                    else:
+                        raise Exception(f"Không tìm thấy file chromedriver thực tại {driver_dir}")
+                
+                # Kiểm tra và cấp quyền thực thi nếu cần (macOS/Linux)
+                import stat
+                import platform
+                if platform.system() in ['Darwin', 'Linux']:
+                    if not os.access(chromedriver_path, os.X_OK):
+                        print("⚙️ Cấp quyền thực thi cho ChromeDriver...")
+                        os.chmod(chromedriver_path, stat.S_IRWXU | stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
+                        print("✓ Đã cấp quyền thực thi")
+                
+                service = Service(chromedriver_path)
+                
+            except Exception as e:
+                print(f"⚠️ WebDriver Manager thất bại: {e}")
+                print("🔄 Thử sử dụng Chrome system...")
+                
+                # Phương pháp 2: Sử dụng Chrome binary system  
+                import platform
+                system = platform.system()
+                
+                if system == "Darwin":  # macOS
+                    # Thử các đường dẫn Chrome phổ biến trên macOS
+                    chrome_paths = [
+                        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                        "/Applications/Chromium.app/Contents/MacOS/Chromium"
+                    ]
+                    
+                    for chrome_path in chrome_paths:
+                        if os.path.exists(chrome_path):
+                            chrome_options.binary_location = chrome_path
+                            print(f"✓ Tìm thấy Chrome tại: {chrome_path}")
+                            break
+                    else:
+                        raise Exception("Không tìm thấy Chrome browser")
+                
+                # Thử tải lại ChromeDriver
+                chromedriver_path = ChromeDriverManager().install()
+                service = Service(chromedriver_path)
+            
             print(f"✓ ChromeDriver đã sẵn sàng: {service.path}")
             
             self.driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -74,7 +129,10 @@ class PhoneNumberSearcher:
             
         except Exception as e:
             print(f"❌ Lỗi khi thiết lập webdriver: {e}")
-            print("💡 Hãy đảm bảo Chrome đã được cài đặt")
+            print("💡 Thử các bước khắc phục:")
+            print("   1. Kiểm tra Chrome đã được cài đặt")
+            print("   2. Chạy: pip install --upgrade webdriver-manager selenium")
+            print("   3. Xóa cache: rm -rf ~/.wdm")
             return False
     
     def generate_phone_combinations(self, pattern):
