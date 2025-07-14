@@ -34,6 +34,19 @@ class PhoneNumberSearcher:
         self.driver = None
         self.found_results = []
         
+        # Anti-blocking features
+        self.user_agents = [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/119.0"
+        ]
+        self.request_count = 0
+        self.last_request_time = 0
+        
     def setup_driver(self, headless=False):
         """Thiết lập webdriver với tự động tải ChromeDriver"""
         chrome_options = Options()
@@ -49,13 +62,45 @@ class PhoneNumberSearcher:
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
         
-        # User-Agent ngẫu nhiên
-        user_agents = [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
-        ]
-        chrome_options.add_argument(f'--user-agent={random.choice(user_agents)}')
+        # Advanced anti-detection options
+        chrome_options.add_argument('--disable-web-security')
+        chrome_options.add_argument('--allow-running-insecure-content')
+        chrome_options.add_argument('--disable-features=VizDisplayCompositor')
+        chrome_options.add_argument('--disable-extensions')
+        chrome_options.add_argument('--disable-plugins')
+        chrome_options.add_argument('--disable-images')  # Faster loading
+        chrome_options.add_argument('--disable-javascript-harmony-shipping')
+        chrome_options.add_argument('--disable-background-timer-throttling')
+        chrome_options.add_argument('--disable-backgrounding-occluded-windows')
+        chrome_options.add_argument('--disable-renderer-backgrounding')
+        chrome_options.add_argument('--disable-field-trial-config')
+        chrome_options.add_argument('--disable-back-forward-cache')
+        chrome_options.add_argument('--disable-ipc-flooding-protection')
+        
+        # Randomize window size
+        import random
+        width = random.randint(1024, 1920)
+        height = random.randint(768, 1080)
+        chrome_options.add_argument(f'--window-size={width},{height}')
+        
+        # Random user agent
+        chrome_options.add_argument(f'--user-agent={random.choice(self.user_agents)}')
+        
+        # Additional preferences
+        prefs = {
+            "profile.default_content_setting_values": {
+                "images": 2,  # Block images for faster loading
+                "plugins": 2,
+                "popups": 2,
+                "geolocation": 2,
+                "notifications": 2,
+                "media_stream": 2,
+            },
+            "profile.managed_default_content_settings": {
+                "images": 2
+            }
+        }
+        chrome_options.add_experimental_option("prefs", prefs)
         
         try:
             # Tự động tải và cài đặt ChromeDriver
@@ -120,8 +165,42 @@ class PhoneNumberSearcher:
             
             self.driver = webdriver.Chrome(service=service, options=chrome_options)
             
-            # Thêm script để ẩn automation
+            # Advanced anti-automation scripts
             self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+            
+            # Additional stealth scripts
+            self.driver.execute_script("""
+                // Remove webdriver property
+                delete navigator.__proto__.webdriver;
+                
+                // Mock plugins
+                Object.defineProperty(navigator, 'plugins', {
+                    get: () => [1, 2, 3, 4, 5]
+                });
+                
+                // Mock languages
+                Object.defineProperty(navigator, 'languages', {
+                    get: () => ['en-US', 'en']
+                });
+                
+                // Mock platform
+                Object.defineProperty(navigator, 'platform', {
+                    get: () => 'Win32'
+                });
+                
+                // Hide automation indicators
+                window.chrome = {
+                    runtime: {}
+                };
+                
+                // Mock permissions
+                const originalQuery = window.navigator.permissions.query;
+                window.navigator.permissions.query = (parameters) => (
+                    parameters.name === 'notifications' ?
+                    Promise.resolve({ state: Notification.permission }) :
+                    originalQuery(parameters)
+                );
+            """)
             
             self.driver.get(self.website_url)
             print(f"✓ Đã tải website: {self.website_url}")
@@ -174,29 +253,40 @@ class PhoneNumberSearcher:
         return combinations
     
     def search_phone_number(self, phone_number, target_name=None, delay=1):
-        """Tìm kiếm một số điện thoại trên website"""
+        """Tìm kiếm một số điện thoại cụ thể"""
         try:
-            # Tìm ô tìm kiếm
-            search_box = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, self.search_box_selector))
-            )
+            # Anti-blocking: Randomize behavior trước khi search
+            if self.request_count > 0 and self.request_count % 5 == 0:
+                self.randomize_browser_behavior()
             
-            # Xóa nội dung cũ và nhập số điện thoại
+            # Intelligent delay thay vì time.sleep cố định
+            self.intelligent_delay(delay, variance=0.3)
+            
+            # Kiểm tra có bị block không
+            if self.check_if_blocked():
+                if self.handle_blocking_detected():
+                    # Thử lại sau khi xử lý blocking
+                    pass
+                else:
+                    return None
+            
+            # Tìm và clear search box
+            wait = WebDriverWait(self.driver, 10)
+            search_box = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.search_box_selector)))
             search_box.clear()
             
-            # Nhập từng ký tự với delay ngẫu nhiên
+            # Type number với delay tự nhiên
             for char in phone_number:
                 search_box.send_keys(char)
-                time.sleep(random.uniform(0.05, 0.15))
+                time.sleep(random.uniform(0.05, 0.15))  # Human-like typing
             
             search_box.send_keys(Keys.RETURN)
             
-            # Chờ kết quả tải
-            wait_time = delay + random.uniform(0, 0.5)
+            # Đợi kết quả load
+            wait_time = random.uniform(2, 4)  # Random wait time
             time.sleep(wait_time)
             
             # Lấy kết quả
-            result_text = ""
             if self.result_selector:
                 try:
                     result_element = self.driver.find_element(By.CSS_SELECTOR, self.result_selector)
@@ -292,6 +382,112 @@ class PhoneNumberSearcher:
         if self.driver:
             self.driver.quit()
             print("✓ Đã đóng webdriver")
+    
+    def intelligent_delay(self, base_delay=1, variance=0.5):
+        """Delay thông minh với variance ngẫu nhiên và adaptive timing"""
+        import time
+        import random
+        
+        current_time = time.time()
+        
+        # Adaptive delay dựa trên số lượng requests
+        if self.request_count > 50:
+            adaptive_multiplier = 1.5
+        elif self.request_count > 20:
+            adaptive_multiplier = 1.2
+        else:
+            adaptive_multiplier = 1.0
+            
+        # Random variance để tránh pattern detection
+        random_variance = random.uniform(-variance, variance)
+        actual_delay = base_delay * adaptive_multiplier + random_variance
+        actual_delay = max(0.5, actual_delay)  # Minimum 0.5s
+        
+        # Ensure minimum time gap từ request trước
+        if self.last_request_time > 0:
+            elapsed = current_time - self.last_request_time
+            if elapsed < actual_delay:
+                extra_wait = actual_delay - elapsed
+                time.sleep(extra_wait)
+        
+        self.last_request_time = time.time()
+        self.request_count += 1
+        
+        if self.request_count % 10 == 0:
+            print(f"🤖 Anti-blocking: Đã thực hiện {self.request_count} requests, delay = {actual_delay:.2f}s")
+    
+    def randomize_browser_behavior(self):
+        """Randomize browser behavior để tránh detection"""
+        import random
+        
+        # Random scroll
+        try:
+            scroll_amount = random.randint(100, 500)
+            self.driver.execute_script(f"window.scrollBy(0, {scroll_amount});")
+            time.sleep(random.uniform(0.1, 0.3))
+            
+            # Random mouse movement simulation
+            if random.random() < 0.3:  # 30% chance
+                self.driver.execute_script("""
+                    var event = new MouseEvent('mousemove', {
+                        'view': window,
+                        'bubbles': true,
+                        'cancelable': true,
+                        'clientX': Math.random() * window.innerWidth,
+                        'clientY': Math.random() * window.innerHeight
+                    });
+                    document.dispatchEvent(event);
+                """)
+        except:
+            pass  # Ignore errors
+    
+    def check_if_blocked(self):
+        """Kiểm tra xem có bị chặn không"""
+        try:
+            page_source = self.driver.page_source.lower()
+            blocked_indicators = [
+                'blocked', 'captcha', 'robot', 'bot', 'rate limit',
+                'too many requests', 'access denied', '403', '429',
+                'cloudflare', 'security check', 'verification'
+            ]
+            
+            for indicator in blocked_indicators:
+                if indicator in page_source:
+                    print(f"⚠️ Có thể bị chặn - phát hiện: {indicator}")
+                    return True
+            return False
+        except:
+            return False
+    
+    def handle_blocking_detected(self):
+        """Xử lý khi phát hiện bị chặn"""
+        print("🛡️ Phát hiện có thể bị chặn - áp dụng biện pháp khắc phục...")
+        
+        # Tăng delay time
+        extended_delay = random.uniform(10, 30)
+        print(f"⏱️ Tạm dừng {extended_delay:.1f} giây...")
+        time.sleep(extended_delay)
+        
+        # Refresh page và đổi user agent
+        try:
+            new_user_agent = random.choice(self.user_agents)
+            self.driver.execute_cdp_cmd('Network.setUserAgentOverride', {
+                "userAgent": new_user_agent
+            })
+            print(f"🔄 Đã đổi User-Agent")
+            
+            # Clear cookies
+            self.driver.delete_all_cookies()
+            print("🍪 Đã xóa cookies")
+            
+            # Refresh page
+            self.driver.refresh()
+            time.sleep(random.uniform(3, 6))
+            
+        except Exception as e:
+            print(f"⚠️ Không thể áp dụng một số biện pháp: {e}")
+        
+        return True
 
 def main():
     """Hàm chính"""

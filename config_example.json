@@ -1,11 +1,16 @@
 {
-  "website_url": "https://example.com/search",
-  "search_box_selector": "#search-input",
-  "result_selector": ".search-results",
-  "phone_pattern": "098x123xxx",
-  "target_name": "Nguyễn Văn A",
+  "website_url": "https://chat.zalo.me/",
+  "search_box_selector": "#contact-search-input",
+  "result_selector": ".friend-item",
+  "phone_pattern": "09751113xx",
+  "target_name": "Nhat",
   "delay": 2,
-  "max_results": 10,
+  "max_results": 5,
   "headless": false,
-  "save_filename": "search_results.json"
+  "save_filename": "search_results.json",
+  "_comments": {
+    "delay": "Tăng delay để tránh bị chặn (2-5 giây khuyến nghị)",
+    "max_results": "Giới hạn kết quả để tránh search quá nhiều",
+    "anti_blocking": "Tool đã tích hợp sẵn intelligent delay, user agent rotation, behavior randomization"
+  }
 } 
