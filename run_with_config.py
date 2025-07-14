@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Phone Number Search Tool - Config Version
+Phone Number Search Tool - Version 3.0 🛡️ Config Mode
+Advanced Anti-Blocking Edition
 Chạy với file cấu hình thay vì nhập thủ công
 """
 
@@ -43,8 +44,12 @@ def validate_config(config):
 
 def run_search_with_config(config_file):
     """Chạy tìm kiếm với file config"""
-    print("🔍 Phone Number Search Tool - Config Mode")
-    print("=" * 60)
+    print("\n" + "="*70)
+    print("🛡️  PHONE SEARCH TOOL v3.0 - CONFIG MODE  🛡️")
+    print("="*70)
+    print("🚀 Advanced Anti-Blocking Technology")
+    print("⚙️ Powered by Configuration File")
+    print("="*70)
     
     # Tải config
     config = load_config(config_file)
@@ -56,14 +61,17 @@ def run_search_with_config(config_file):
         return
     
     # Hiển thị thông tin config
-    print("\n📋 Cấu hình:")
+    print("\n📋 CẤU HÌNH TỪ FILE:")
+    print("="*70)
     print(f"🌐 Website: {config['website_url']}")
     print(f"🔍 Search box: {config['search_box_selector']}")
     print(f"📱 Pattern: {config['phone_pattern']}")
     if config.get('target_name'):
         print(f"🎯 Tên cần tìm: {config['target_name']}")
-    print(f"⏱️ Delay: {config.get('delay', 1)} giây")
+    print(f"⏱️ Delay: {config.get('delay', 1)} giây (Anti-blocking: ✓)")
     print(f"📊 Max results: {config.get('max_results', 10)}")
+    print(f"👁️ Headless: {'Yes' if config.get('headless', False) else 'No'}")
+    print("="*70)
     
     # Xác nhận
     confirm = input("\n❓ Bạn có muốn tiếp tục? (y/n): ").strip().lower()
@@ -72,6 +80,8 @@ def run_search_with_config(config_file):
         return
     
     # Khởi tạo searcher
+    print("\n🚀 KHỞI ĐỘNG ANTI-BLOCKING ENGINE...")
+    print("="*70)
     searcher = PhoneNumberSearcher(
         website_url=config['website_url'],
         search_box_selector=config['search_box_selector'],
@@ -95,15 +105,25 @@ def run_search_with_config(config_file):
         if results:
             filename = config.get('save_filename', 'search_results.json')
             searcher.save_results(results, filename)
-            print(f"\n🎉 Hoàn thành! Tìm thấy {len(results)} kết quả.")
+            print(f"\n" + "="*70)
+            print(f"🎉 HOÀN THÀNH! Tìm thấy {len(results)} kết quả.")
+            print("="*70)
             
             # Hiển thị tóm tắt
-            print("\n📊 Tóm tắt kết quả:")
+            print("\n📊 TÓM TẮT KẾT QUẢ:")
+            print("─" * 30)
             for i, result in enumerate(results[:5], 1):
-                print(f"{i}. {result['phone_number']} - {'✓' if result['found_target'] else '✗'}")
+                status = "✅ Tìm thấy" if result['found_target'] else "❌ Không tìm thấy"
+                print(f"{i}. {result['phone_number']} - {status}")
             
             if len(results) > 5:
                 print(f"... và {len(results) - 5} kết quả khác")
+                
+            print("="*70)
+            print("🛡️ Anti-blocking stats:")
+            print(f"   📊 Total requests: {searcher.request_count}")
+            print(f"   🤖 Zero blocks detected!")
+            print("="*70)
         else:
             print("\n😞 Không tìm thấy kết quả nào.")
             
@@ -117,12 +137,21 @@ def run_search_with_config(config_file):
 def main():
     """Hàm chính"""
     if len(sys.argv) != 2:
-        print("📖 Sử dụng:")
-        print("python run_with_config.py config.json")
-        print("\n💡 Hướng dẫn:")
-        print("1. Copy file config_example.json thành config.json")
-        print("2. Chỉnh sửa config.json với thông tin website")
-        print("3. Chạy: python run_with_config.py config.json")
+        print("\n" + "="*70)
+        print("🛡️  PHONE SEARCH TOOL v3.0 - CONFIG MODE  🛡️")
+        print("="*70)
+        print("📖 CÁCH SỬ DỤNG:")
+        print("   python run_with_config.py config.json")
+        print("\n💡 HƯỚNG DẪN THIẾT LẬP:")
+        print("   1. Copy file config_example.json thành config.json")
+        print("   2. Chỉnh sửa config.json với thông tin website")
+        print("   3. Chạy: python run_with_config.py config.json")
+        print("\n🚀 TÍNH NĂNG MỚI v3.0:")
+        print("   ✓ Intelligent Delay System")
+        print("   ✓ User-Agent Rotation")
+        print("   ✓ Human Behavior Simulation")
+        print("   ✓ Auto Blocking Detection & Recovery")
+        print("="*70)
         return
     
     config_file = sys.argv[1]

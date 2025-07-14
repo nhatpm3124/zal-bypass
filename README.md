@@ -1,6 +1,16 @@
-# Phone Number Search Tool
+# Phone Number Search Tool v3.0 🛡️
 
-A tool for searching phone numbers on websites by trying combinations of missing digits.
+## 🚀 Version 3.0 - Advanced Anti-Blocking Edition
+
+A powerful tool for searching phone numbers on websites with **intelligent anti-blocking technology**.
+
+### 🆕 New Features in v3.0:
+- 🛡️ **Intelligent Delay System** - Adaptive timing with random variance
+- 🔄 **User-Agent Rotation** - 7 realistic browser signatures  
+- 🤖 **Human Behavior Simulation** - Random scrolling & mouse movement
+- 🔍 **Auto Blocking Detection** - Smart detection of blocking attempts
+- 🚑 **Auto Recovery System** - Automatic recovery when blocked
+- 📱 **Browser Fingerprint Randomization** - Advanced stealth mode
 
 ## Run Directly from GitHub (No Download Required)
 
@@ -319,7 +329,19 @@ sudo systemctl start phone-search
 
 ## Changelog
 
-### v2.3 (Latest)
+### v3.0 (Latest) - Anti-Blocking Edition 🛡️
+- **NEW**: Intelligent Delay System with adaptive timing
+- **NEW**: User-Agent Rotation (7 realistic signatures)
+- **NEW**: Human Behavior Simulation (scroll, mouse movement)
+- **NEW**: Auto Blocking Detection & Recovery
+- **NEW**: Browser Fingerprint Randomization
+- **NEW**: Advanced stealth scripts
+- **IMPROVED**: Enhanced error handling & recovery
+- **IMPROVED**: Better success rate on protected websites
+- **ADDED**: Anti-blocking configuration guide
+- **ADDED**: Performance monitoring & stats
+
+### v2.3 (Previous)
 - Added `download_and_run.sh` - Perfect solution for stdin
 - Automatic new terminal opening on macOS/Linux
 - Improved user experience with remote execution
