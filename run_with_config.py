@@ -11,6 +11,17 @@ import sys
 import os
 from phone_search import PhoneNumberSearcher
 
+def safe_input(prompt):
+    """Safe input function that handles stdin issues"""
+    try:
+        return input(prompt)
+    except (EOFError, KeyboardInterrupt):
+        print("\n⚠️ Input interrupted")
+        return ""
+    except Exception as e:
+        print(f"⚠️ Input error: {e}")
+        return ""
+
 def load_config(config_file):
     """Tải cấu hình từ file JSON"""
     try:
@@ -74,7 +85,7 @@ def run_search_with_config(config_file):
     print("="*70)
     
     # Xác nhận
-    confirm = input("\n❓ Bạn có muốn tiếp tục? (y/n): ").strip().lower()
+    confirm = safe_input("\n❓ Bạn có muốn tiếp tục? (y/n): ").strip().lower()
     if confirm not in ['y', 'yes', 'có']:
         print("❌ Hủy bỏ")
         return

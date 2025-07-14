@@ -201,6 +201,15 @@ Run headless: n
 }
 ```
 
+### Example 5: Demo Mode (No Input Required)
+```bash
+# Run with predefined Zalo settings
+python phone_search.py --demo
+
+# Perfect for testing without manual input
+# Uses: chat.zalo.me, pattern: 09751113xx, target: Nhat
+```
+
 ## How to Find CSS Selector
 
 1. **Open the website** you want to search
@@ -275,6 +284,26 @@ cd zal-bypass-interactive && python3 phone_search.py
 git clone https://github.com/nhatpm3124/zal-bypass.git
 cd zal-bypass
 python phone_search.py
+
+# Or use demo mode (no input required)
+python phone_search.py --demo
+```
+
+### Script stops after showing menu
+```bash
+# Fixed in v3.0 with improved input handling
+# If still experiencing issues, try:
+
+# 1. Local installation
+git clone https://github.com/nhatpm3124/zal-bypass.git
+cd zal-bypass
+python phone_search.py
+
+# 2. Demo mode
+python phone_search.py --demo
+
+# 3. Config mode  
+python run_with_config.py config_example.json
 ```
 
 ### Error running remote scripts
@@ -336,8 +365,11 @@ sudo systemctl start phone-search
 - **NEW**: Auto Blocking Detection & Recovery
 - **NEW**: Browser Fingerprint Randomization
 - **NEW**: Advanced stealth scripts
+- **NEW**: Demo Mode for testing without input
 - **IMPROVED**: Enhanced error handling & recovery
 - **IMPROVED**: Better success rate on protected websites
+- **IMPROVED**: Safe input handling for remote execution
+- **FIXED**: Script no longer stops after showing menu
 - **ADDED**: Anti-blocking configuration guide
 - **ADDED**: Performance monitoring & stats
 

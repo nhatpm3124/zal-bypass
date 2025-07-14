@@ -188,7 +188,16 @@ main() {
     
     while true; do
         show_menu
-        read -p "Enter your choice (1-5): " choice
+        
+        # Handle stdin for remote execution
+        if [[ -t 0 ]]; then
+            # Normal terminal input
+            read -p "Enter your choice (1-5): " choice
+        else
+            # Remote execution - redirect from /dev/tty
+            exec < /dev/tty
+            read -p "Enter your choice (1-5): " choice
+        fi
         echo ""
         
         case $choice in
@@ -206,7 +215,13 @@ main() {
                 ;;
             4)
                 show_v3_features
-                read -p "Press Enter to continue..."
+                echo "Press any key to continue..."
+                if [[ -t 0 ]]; then
+                    read -n 1 -s
+                else
+                    exec < /dev/tty
+                    read -n 1 -s
+                fi
                 continue
                 ;;
             5)
@@ -215,6 +230,13 @@ main() {
                 ;;
             *)
                 echo -e "${RED}❌ Invalid option. Please choose 1-5.${NC}"
+                echo "Press any key to continue..."
+                if [[ -t 0 ]]; then
+                    read -n 1 -s
+                else
+                    exec < /dev/tty
+                    read -n 1 -s
+                fi
                 ;;
         esac
     done

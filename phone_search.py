@@ -10,6 +10,7 @@ import time
 import itertools
 import os
 import glob
+import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -20,9 +21,20 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import json
-import sys
 import random
 import string
+
+def safe_input(prompt):
+    """Safe input function that handles stdin issues"""
+    try:
+        # Try normal input first
+        return input(prompt)
+    except (EOFError, KeyboardInterrupt):
+        print("\n⚠️ Input interrupted")
+        return ""
+    except Exception as e:
+        print(f"⚠️ Input error: {e}")
+        return ""
 
 class PhoneNumberSearcher:
     def __init__(self, website_url, search_box_selector, result_selector=None):
@@ -492,80 +504,108 @@ class PhoneNumberSearcher:
 
 def main():
     """Hàm chính"""
-    print("\n" + "="*70)
-    print("🛡️  PHONE NUMBER SEARCH TOOL v3.0 - ANTI-BLOCKING EDITION  🛡️")
-    print("="*70)
-    print("🚀 Tính năng mới:")
-    print("   ✓ Intelligent Delay System")
-    print("   ✓ User-Agent Rotation") 
-    print("   ✓ Human Behavior Simulation")
-    print("   ✓ Auto Blocking Detection & Recovery")
-    print("   ✓ Advanced Browser Fingerprint Randomization")
-    print("="*70)
-    print("💡 Được thiết kế đặc biệt cho: chat.zalo.me, Facebook, và các website có bảo mật cao")
-    print("="*70)
     
-    # Cấu hình website
-    print("\n📋 THIẾT LẬP WEBSITE:")
-    print("─" * 30)
-    website_url = input("🌐 Nhập URL website: ").strip()
-    if not website_url:
-        print("❌ Vui lòng nhập URL website!")
-        return
+    # Check for demo mode
+    demo_mode = len(sys.argv) > 1 and sys.argv[1] == '--demo'
     
-    if not website_url.startswith(('http://', 'https://')):
-        website_url = 'https://' + website_url
-    
-    search_box_selector = input("🔍 CSS selector của ô tìm kiếm: ").strip()
-    if not search_box_selector:
-        print("❌ Vui lòng nhập CSS selector!")
-        return
-    
-    result_selector = input("📊 CSS selector khu vực kết quả (để trống nếu không biết): ").strip()
-    if not result_selector:
-        result_selector = None
-    
-    print("\n📱 THIẾT LẬP TÌM KIẾM:")
-    print("─" * 30)
-    phone_pattern = input("📞 Pattern số điện thoại (VD: 098x123xxx): ").strip()
-    if not phone_pattern:
-        print("❌ Vui lòng nhập pattern số điện thoại!")
-        return
-    
-    target_name = input("🎯 Tên cần tìm (để trống nếu chỉ muốn thu thập số): ").strip()
-    if not target_name:
-        target_name = None
-    
-    print("\n⚙️ THIẾT LẬP ANTI-BLOCKING:")
-    print("─" * 30)
-    try:
-        delay = float(input("⏱️ Delay giữa các tìm kiếm (giây, khuyến nghị 2-5): ") or "2")
-        max_results = int(input("📊 Số kết quả tối đa (khuyến nghị ≤20): ") or "10")
-    except ValueError:
-        print("❌ Vui lòng nhập số hợp lệ!")
-        return
-    
-    headless_input = input("👁️ Chạy ẩn trình duyệt? (y/n, mặc định n): ").strip().lower()
-    headless = headless_input in ['y', 'yes', 'có']
-    
-    # Hiển thị thông tin cấu hình
-    print("\n" + "="*70)
-    print("📋 XÁC NHẬN CẤU HÌNH:")
-    print("="*70)
-    print(f"🌐 Website: {website_url}")
-    print(f"🔍 Search box: {search_box_selector}")
-    print(f"📱 Pattern: {phone_pattern}")
-    if target_name:
+    if demo_mode:
+        print("\n🎬 DEMO MODE - Using predefined values")
+        print("="*70)
+        
+        # Predefined demo values
+        website_url = "https://chat.zalo.me/"
+        search_box_selector = "#contact-search-input"
+        result_selector = ".friend-item"
+        phone_pattern = "09751113xx"
+        target_name = "Nhat"
+        delay = 2
+        max_results = 5
+        headless = True
+        
+        print(f"🌐 Website: {website_url}")
+        print(f"🔍 Search box: {search_box_selector}")
+        print(f"📱 Pattern: {phone_pattern}")
         print(f"🎯 Target: {target_name}")
-    print(f"⏱️ Delay: {delay}s (Anti-blocking: ✓)")
-    print(f"📊 Max results: {max_results}")
-    print(f"👁️ Headless: {'Yes' if headless else 'No'}")
-    print("="*70)
-    
-    confirm = input("\n❓ Bạn có muốn tiếp tục? (y/n): ").strip().lower()
-    if confirm not in ['y', 'yes', 'có']:
-        print("❌ Hủy bỏ")
-        return
+        print(f"⏱️ Delay: {delay}s")
+        print(f"📊 Max results: {max_results}")
+        print("🎬 Demo mode: ON")
+        print("="*70)
+        
+    else:
+        print("\n" + "="*70)
+        print("🛡️  PHONE NUMBER SEARCH TOOL v3.0 - ANTI-BLOCKING EDITION  🛡️")
+        print("="*70)
+        print("🚀 Tính năng mới:")
+        print("   ✓ Intelligent Delay System")
+        print("   ✓ User-Agent Rotation") 
+        print("   ✓ Human Behavior Simulation")
+        print("   ✓ Auto Blocking Detection & Recovery")
+        print("   ✓ Advanced Browser Fingerprint Randomization")
+        print("="*70)
+        print("💡 Được thiết kế đặc biệt cho: chat.zalo.me, Facebook, và các website có bảo mật cao")
+        print("="*70)
+        
+        # Cấu hình website
+        print("\n📋 THIẾT LẬP WEBSITE:")
+        print("─" * 30)
+        website_url = safe_input("🌐 Nhập URL website: ").strip()
+        if not website_url:
+            print("❌ Vui lòng nhập URL website!")
+            return
+        
+        if not website_url.startswith(('http://', 'https://')):
+            website_url = 'https://' + website_url
+        
+        search_box_selector = safe_input("🔍 CSS selector của ô tìm kiếm: ").strip()
+        if not search_box_selector:
+            print("❌ Vui lòng nhập CSS selector!")
+            return
+        
+        result_selector = safe_input("📊 CSS selector khu vực kết quả (để trống nếu không biết): ").strip()
+        if not result_selector:
+            result_selector = None
+        
+        print("\n📱 THIẾT LẬP TÌM KIẾM:")
+        print("─" * 30)
+        phone_pattern = safe_input("📞 Pattern số điện thoại (VD: 098x123xxx): ").strip()
+        if not phone_pattern:
+            print("❌ Vui lòng nhập pattern số điện thoại!")
+            return
+        
+        target_name = safe_input("🎯 Tên cần tìm (để trống nếu chỉ muốn thu thập số): ").strip()
+        if not target_name:
+            target_name = None
+        
+        print("\n⚙️ THIẾT LẬP ANTI-BLOCKING:")
+        print("─" * 30)
+        try:
+            delay = float(safe_input("⏱️ Delay giữa các tìm kiếm (giây, khuyến nghị 2-5): ") or "2")
+            max_results = int(safe_input("📊 Số kết quả tối đa (khuyến nghị ≤20): ") or "10")
+        except ValueError:
+            print("❌ Vui lòng nhập số hợp lệ!")
+            return
+        
+        headless_input = safe_input("👁️ Chạy ẩn trình duyệt? (y/n, mặc định n): ").strip().lower()
+        headless = headless_input in ['y', 'yes', 'có']
+        
+        # Hiển thị thông tin cấu hình
+        print("\n" + "="*70)
+        print("📋 XÁC NHẬN CẤU HÌNH:")
+        print("="*70)
+        print(f"🌐 Website: {website_url}")
+        print(f"🔍 Search box: {search_box_selector}")
+        print(f"📱 Pattern: {phone_pattern}")
+        if target_name:
+            print(f"🎯 Target: {target_name}")
+        print(f"⏱️ Delay: {delay}s (Anti-blocking: ✓)")
+        print(f"📊 Max results: {max_results}")
+        print(f"👁️ Headless: {'Yes' if headless else 'No'}")
+        print("="*70)
+        
+        confirm = safe_input("\n❓ Bạn có muốn tiếp tục? (y/n): ").strip().lower()
+        if confirm not in ['y', 'yes', 'có']:
+            print("❌ Hủy bỏ")
+            return
     
     # Khởi tạo và chạy
     print("\n🚀 KHỞI ĐỘNG ANTI-BLOCKING ENGINE...")
