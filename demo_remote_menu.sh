@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Phone Number Search Tool v3.0 - Remote Runner 🛡️
-# Advanced Anti-Blocking Edition
+# Demo Remote Menu v3.0
+# Hiển thị giao diện menu mà không chạy thật
 
-set -e
-
-# Colors for output
+# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -14,7 +12,6 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Function to print colored output
 print_header() {
     echo -e "${PURPLE}===============================================${NC}"
     echo -e "${CYAN}🛡️  PHONE SEARCH TOOL v3.0 - REMOTE RUNNER  🛡️${NC}"
@@ -36,53 +33,16 @@ print_features() {
     echo ""
 }
 
-check_dependencies() {
+show_dependencies() {
     echo -e "${YELLOW}💡 Kiểm tra dependencies...${NC}"
-    
-    # Check Python3
-    if command -v python3 &> /dev/null; then
-        echo -e "${GREEN}✅ Python3 đã được cài đặt${NC}"
-    else
-        echo -e "${RED}❌ Python3 chưa được cài đặt${NC}"
-        echo -e "${YELLOW}💡 Hãy cài đặt Python3 trước khi tiếp tục${NC}"
-        exit 1
-    fi
-    
-    # Check pip
-    if command -v pip3 &> /dev/null || command -v pip &> /dev/null; then
-        echo -e "${GREEN}✅ Pip đã được cài đặt${NC}"
-    else
-        echo -e "${RED}❌ Pip chưa được cài đặt${NC}"
-        exit 1
-    fi
-}
-
-download_project() {
+    echo -e "${GREEN}✅ Python3 đã được cài đặt${NC}"
+    echo -e "${GREEN}✅ Pip đã được cài đặt${NC}"
+    echo ""
     echo -e "${YELLOW}💡 Đang tải xuống từ GitHub...${NC}"
-    
-    # Create temp directory
-    TEMP_DIR="/tmp/bypass-phone-$(date +%s)"
-    
-    # Clone repository
-    if git clone https://github.com/nhatpm3124/zal-bypass.git "$TEMP_DIR"; then
-        echo -e "${GREEN}✅ Tải xuống thành công${NC}"
-        cd "$TEMP_DIR"
-    else
-        echo -e "${RED}❌ Không thể tải xuống từ GitHub${NC}"
-        exit 1
-    fi
-}
-
-install_dependencies() {
+    echo -e "${GREEN}✅ Tải xuống thành công${NC}"
+    echo ""
     echo -e "${YELLOW}💡 Đang cài đặt dependencies...${NC}"
-    
-    if pip3 install -r requirements.txt --quiet; then
-        echo -e "${GREEN}✅ Dependencies đã được cài đặt${NC}"
-    else
-        echo -e "${RED}❌ Không thể cài đặt dependencies${NC}"
-        exit 1
-    fi
-    
+    echo -e "${GREEN}✅ Dependencies đã được cài đặt${NC}"
     echo -e "${GREEN}✅ Thiết lập hoàn tất!${NC}"
     echo ""
 }
@@ -108,34 +68,6 @@ show_menu() {
     echo ""
     echo -e "${PURPLE}═══════════════════════════════════════════════════════════════${NC}"
     echo ""
-}
-
-run_interactive() {
-    echo -e "${CYAN}🔍 Starting Interactive Mode...${NC}"
-    echo -e "${PURPLE}═══════════════════════════════════════════════════════════════${NC}"
-    python3 phone_search.py
-}
-
-run_quick_test() {
-    echo -e "${CYAN}⚡ Starting Quick Test...${NC}"
-    echo -e "${PURPLE}═══════════════════════════════════════════════════════════════${NC}"
-    python3 quick_start.py
-}
-
-run_config_mode() {
-    echo -e "${CYAN}⚙️ Starting Config Mode...${NC}"
-    echo -e "${PURPLE}═══════════════════════════════════════════════════════════════${NC}"
-    
-    if [ -f "config_example.json" ]; then
-        echo -e "${YELLOW}💡 Sử dụng config_example.json...${NC}"
-        python3 run_with_config.py config_example.json
-    else
-        echo -e "${RED}❌ Không tìm thấy config file${NC}"
-        echo -e "${YELLOW}💡 Tạo config file mới...${NC}"
-        cp config_example.json config.json
-        echo -e "${GREEN}✅ Đã tạo config.json${NC}"
-        python3 run_with_config.py config.json
-    fi
 }
 
 show_v3_features() {
@@ -167,64 +99,33 @@ show_v3_features() {
     echo ""
 }
 
-cleanup() {
-    echo ""
-    echo -e "${YELLOW}💡 Cleaning up...${NC}"
-    cd /
-    rm -rf "$TEMP_DIR" 2>/dev/null || true
-    echo -e "${GREEN}✅ Cleanup completed!${NC}"
-    echo ""
-}
-
 main() {
-    # Set trap for cleanup on exit
-    trap cleanup EXIT
+    echo -e "${BLUE}🎬 DEMO - REMOTE RUNNER v3.0 MENU${NC}"
+    echo -e "${YELLOW}💡 Đây là demo giao diện run_remote.sh, không chạy thật sự${NC}"
+    echo ""
     
     print_header
     print_features
-    check_dependencies
-    download_project
-    install_dependencies
+    show_dependencies
+    show_menu
     
-    while true; do
-        show_menu
-        read -p "Enter your choice (1-5): " choice
-        echo ""
-        
-        case $choice in
-            1)
-                run_interactive
-                break
-                ;;
-            2)
-                run_quick_test
-                break
-                ;;
-            3)
-                run_config_mode
-                break
-                ;;
-            4)
-                show_v3_features
-                read -p "Press Enter to continue..."
-                continue
-                ;;
-            5)
-                echo -e "${CYAN}Thanks for using Phone Search Tool v3.0! 🚀${NC}"
-                exit 0
-                ;;
-            *)
-                echo -e "${RED}❌ Invalid option. Please choose 1-5.${NC}"
-                ;;
-        esac
-    done
+    echo -e "${YELLOW}Enter your choice (1-5): ${GREEN}4${NC}"
+    echo ""
     
+    show_v3_features
+    
+    echo -e "${GREEN}Press Enter to continue...${NC}"
+    echo ""
+    echo -e "${GREEN}Enter your choice (1-5): ${GREEN}5${NC}"
+    echo ""
+    echo -e "${CYAN}Thanks for using Phone Search Tool v3.0! 🚀${NC}"
     echo ""
     echo -e "${GREEN}🎉 Hoàn thành!${NC}"
     echo -e "${YELLOW}💡 Để cài đặt vĩnh viễn, chạy:${NC}"
     echo -e "${CYAN}curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/install.sh | bash${NC}"
     echo ""
+    echo -e "${PURPLE}✨ Demo hoàn tất! Để chạy thật:${NC}"
+    echo -e "${CYAN}curl -sSL https://raw.githubusercontent.com/nhatpm3124/zal-bypass/main/run_remote.sh | bash${NC}"
 }
 
-# Run main function
 main 
